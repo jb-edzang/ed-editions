@@ -1,0 +1,23 @@
+/* Mettre toutes les divs en flex */
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style des éléments dans le footer */
+.footer > div {
+  width: calc(
+    33.33% - 10px
+  ); /* Pour diviser en trois colonnes avec un espace entre */
+  padding: 5px; /* Espacement interne */
+  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+  overflow: hidden; /* Cacher le texte dépassant */
+  text-overflow: ellipsis; /* Ajouter des points de suspension */
+  border-right: 1px solid black; /* Trait vertical entre les divs */
+  text-align: center; /* Centrer le texte */
+}
+
+/* Retirer la bordure de la dernière div */
+.footer > div:last-child {
+  border-right: none;
+}
