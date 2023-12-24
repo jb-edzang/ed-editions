@@ -60,7 +60,7 @@ const UploadPhoto = () => {
         <h1 className="text-3xl font-bold mb-6">Upload Photo</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="title" className="block mb-2">
-            Title :
+            Photo Title :
           </label>
           <input
             id="title"

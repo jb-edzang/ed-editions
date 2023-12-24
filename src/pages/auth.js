@@ -35,17 +35,18 @@ export default function Auth() {
     e.preventDefault();
 
     try {
-      console.log("Appel à l'API avec les données : ", {
+      console.log("Appel à l'API a fourni les données suivantes : ", {
         email,
-        password,
+        pwdHash,
         username,
       });
       // appel à l'API
       const response = await axios.post("/api/auth", {
         email,
-        password,
+        pwdHash,
         username,
       });
+      return response.data;
       // Gérer la réponse de l'authentification
     } catch (error) {
       setError("Une erreur s'est produite lors de l'authentification.");

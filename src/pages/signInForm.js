@@ -11,7 +11,7 @@ Objet requis : user, pwd.
 Path API : /api/signin.
 */
 
-const SignIn = () => {
+const SignInForm = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -68,4 +68,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInForm;

@@ -4,12 +4,12 @@ import "tailwindcss/tailwind.css";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const SignUp = () => {
+const SignUpForm = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     user: "",
     email: "",
-    password: "",
+    pwdHash: "",
   });
 
   const [userValidation, setUserValidation] = useState(false);
@@ -23,12 +23,13 @@ const SignUp = () => {
       [name]: value,
     });
 
-    if (name === "user") {
+    if (name === "username") {
       const isValidUser = /^[a-zA-Z][a-zA-Z0-9]*$/.test(value);
       setUserValidation(isValidUser);
     }
 
-    if (name === "password") {
+    if (name === "pwdHash") {
+      // Remplacer "password" par "pwdHash"
       const isValidPassword = /^[a-zA-Z0-9-_]{8,24}$/.test(value);
       setPasswordValidation(isValidPassword);
     }
@@ -43,10 +44,10 @@ const SignUp = () => {
     e.preventDefault();
     try {
       // Soumission des données au serveur via "/api/signUp"
-      const response = await axios.post("/api/signUp", formData);
+      const response = await axios.post("/api/signup", formData);
       console.log("User registered !", response.data);
       // Réinitialiser le formulaire
-      setFormData({ user: "", email: "", password: "" });
+      setFormData({ user: "", email: "", pwdHash: "" }); // Remplacer "password" par "pwdHash"
       setUserValidation(false);
       setEmailValidation(false);
       setPasswordValidation(false);
@@ -78,7 +79,7 @@ const SignUp = () => {
               }`}
               id="username"
               type="text"
-              name="user"
+              name="username"
               autoComplete="off"
               placeholder="Username"
               value={formData.user}
@@ -128,10 +129,10 @@ const SignUp = () => {
               }`}
               id="password"
               type="password"
-              name="password"
+              name="pwdHash" // Remplacer "password" par "pwdHash"
               autoComplete="off"
               placeholder="Password"
-              value={formData.password}
+              value={formData.pwdHash} // Remplacer "password" par "pwdHash"
               onChange={handleChange}
             />
             {passwordValidation ? (
@@ -156,4 +157,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpForm;

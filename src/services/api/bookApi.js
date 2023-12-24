@@ -1,40 +1,40 @@
-/*import axios from "axios";
+import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://localhost:3030", // Assurez-vous de mettre la bonne URL de votre API
+const bookApi = axios.create({
+  baseURL: "https://localhost:3030/api", // Assurez-vous de mettre la bonne URL de votre API
   //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
-});*/
+});
 
 export const getAllBooks = async () => {
   try {
-    const response = await api.get("/books");
+    const response = await bookApi.get("/api/books");
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
   }
 };
 
-export const createBook = async (bookData) => {
+export const createBook = async (newBook) => {
   try {
-    const response = await api.post("/books", bookData);
+    const response = await bookApi.post("/api/books", newBook);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
   }
 };
 
-export const updateBook = async (id, bookData) => {
+export const updateBook = async (id, updatedBook) => {
   try {
-    const response = await api.put(`/books/${id}`, bookData);
+    const response = await bookApi.put(`/api/books/${id}`, updatedBook);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
   }
 };
 
-export const patchBook = async (id, bookData) => {
+export const patchBook = async (id, patchedBook) => {
   try {
-    const response = await api.patch(`/books/${id}`, bookData);
+    const response = await bookApi.patch(`/api/books/${id}`, patch);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
@@ -43,7 +43,7 @@ export const patchBook = async (id, bookData) => {
 
 export const deleteBook = async (id) => {
   try {
-    const response = await api.delete(`/books/${id}`);
+    const response = await bookApi.delete(`/api/books/${id}`);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);

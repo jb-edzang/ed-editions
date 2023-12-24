@@ -1,13 +1,13 @@
-/*import axios from "axios";
+import axios from "axios";
 
-const api = axios.create({
+const photoApi = axios.create({
   baseURL: "https://localhost:3030", // Assurez-vous d'adapter l'URL à votre API
   //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
-}); */
+});
 
 export const getAllPhotos = async () => {
   try {
-    const response = await api.get("/photos");
+    const response = await photoApi.get("/photos");
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
@@ -16,7 +16,7 @@ export const getAllPhotos = async () => {
 
 export const createPhoto = async (photoData) => {
   try {
-    const response = await api.post("/photos", photoData);
+    const response = await photoApi.post("/photos", photoData);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
@@ -25,7 +25,7 @@ export const createPhoto = async (photoData) => {
 
 export const updatePhoto = async (id, updatedData) => {
   try {
-    const response = await api.put(`/photos/${id}`, updatedData);
+    const response = await photoApi.put(`/photos/${id}`, updatedData);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
@@ -34,7 +34,7 @@ export const updatePhoto = async (id, updatedData) => {
 
 export const deletePhoto = async (id) => {
   try {
-    const response = await api.delete(`/photos/${id}`);
+    const response = await photoApi.delete(`/photos/${id}`);
     return response.data;
   } catch (err) {
     throw new Error(err.response.data.error);
