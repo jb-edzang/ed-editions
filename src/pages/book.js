@@ -1,13 +1,18 @@
+import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
 import Layout from "@/Layout";
 import "tailwindcss/tailwind.css";
+import { createBook } from "@/services/api/bookApi";
+import { useRouter } from "next/router";
 
-const CreateBook = () => {
+const Book = () => {
+  const router = useRouter();
+  const { userId, isAuthenticated } = useAuth();
   const [bookData, setBookData] = useState({
     title: "",
-    user_id: "",
     description: "",
     publication_date: "",
+    user_id: userId,
   });
 
   const handleChange = (e) => {
@@ -19,13 +24,35 @@ const CreateBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // vérification de l'authentification avant de créer le livre
+    // if (!isAuthenticated || !userId) {
+    //   // Redirection vers la page de connexion ou d'inscription
+    //   router.push("/signUpForm"); // ou router.push("/signUpForm");
+    //   return;
+    // }
+
+    const { title, description, publication_date, user_id } = req.body;
+
+    if (!title || !description || !publication_date || !user_id) {
+      console.error("Veuillez remplir tous les champs du livre.");
+      return;
+    }
+
+    const newBook = {
+      title,
+      user_id,
+      description,
+      publication_date,
+    };
+
     try {
-      const response = await axios.post("/api/books", bookData);
-      console.log("Book created!", response.data);
-      // Gérer la réponse du serveur, rediriger ou effectuer d'autres actions
+      const response = await createBook("/api/books", newBook);
+      console.log("Book created!", response);
+      // Gérer la réussite de la création du livre
     } catch (error) {
       console.error("Book creation failed:", error);
-      // Gérer les erreurs
+      // Gérer l'échec de la création du livre
     }
   };
 
@@ -34,6 +61,9 @@ const CreateBook = () => {
       <div className="w-full md:w-1/2 lg:w-1/3 p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-center">Create Book</h1>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+          {/* Input de type hidden pour stocker userId */}
+          <input type="hidden" name="user_id" value={userId} />
+
           <label htmlFor="title" className="text-gray-700">
             Title
           </label>
@@ -80,4 +110,4 @@ const CreateBook = () => {
   );
 };
 
-export default CreateBook;
+export default Book;

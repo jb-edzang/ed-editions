@@ -1,9 +1,9 @@
-import { signIn } from "../../services/api/signInApi";
+import { signInUser } from "../../services/api/signInApi";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const result = await signIn(req.body);
+      const result = await signInUser(req.body);
       res.status(200).json(result);
     } catch (error) {
       res.status(401).json({ error: error.message });

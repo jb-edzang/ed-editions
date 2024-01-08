@@ -5,27 +5,29 @@ import {
   faLinkedin,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
+//import Link from "next/link";
 
 const SocialIcons = () => {
   return (
-    <div className=" flex gap-4 mr-auto">
-      <Link href="tel:yourPhoneNumber" className="phone">
+    <ul className="bg-red-400 flex gap-4 ">
+      <li href="tel:yourPhoneNumber" className="phone">
         <FontAwesomeIcon icon={faPhone} />
-      </Link>
-      <Link href="/contact" className="emailIcon">
+      </li>
+      {/* <Link href="/contact" passHref> */}
+      <li className="emailIcon">
         <FontAwesomeIcon icon={faEnvelope} />
-      </Link>
-      <Link href="https://www.linkedin.com/yourProfile" className="linkedIn">
+      </li>
+      {/* </Link> */}
+      <li href="https://www.linkedin.com/yourProfile" className="linkedIn">
         <FontAwesomeIcon icon={faLinkedin} />
-      </Link>
-      <Link href="https://www.facebook.com/yourProfile" className="facebook">
+      </li>
+      <li href="https://www.facebook.com/yourProfile" className="facebook">
         <FontAwesomeIcon icon={faFacebook} />
-      </Link>
-      <Link href="https://www.youtube.com/yourChannel" className="youtube">
+      </li>
+      <li href="https://www.youtube.com/yourChannel" className="youtube">
         <FontAwesomeIcon icon={faYoutube} />
-      </Link>
-    </div>
+      </li>
+    </ul>
   );
 };
 

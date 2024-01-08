@@ -5,9 +5,9 @@ import axios from "axios";
 
 const User = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    user: "",
     email: "",
-    password: "",
+    pwdHash: "",
   });
 
   const handleChange = (e) => {
@@ -50,8 +50,8 @@ const User = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              name="username"
-              value={formData.username}
+              name="user"
+              value={formData.user}
               onChange={handleChange}
             />
           </div>
@@ -74,8 +74,8 @@ const User = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
-              name="password"
-              value={formData.password}
+              name="pwdHash"
+              value={formData.pwdHash}
               onChange={handleChange}
             />
           </div>

@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const themesApi = axios.create({
-  baseURL: "https://localhost:3030", // Assurez-vous d'adapter l'URL à votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030",
 });
 
 export const getAllThemes = async () => {
@@ -10,7 +9,10 @@ export const getAllThemes = async () => {
     const response = await themesApi.get("/themes");
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la récupération des thèmes :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -19,7 +21,13 @@ export const getThemeById = async (id) => {
     const response = await themesApi.get(`/themes/${id}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération du thème par ID :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -28,7 +36,10 @@ export const createTheme = async (themeData) => {
     const response = await themesApi.post("/themes", themeData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la création du thème :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -37,7 +48,10 @@ export const updateTheme = async (id, updatedData) => {
     const response = await themesApi.put(`/themes/${id}`, updatedData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la mise à jour du thème :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -46,6 +60,11 @@ export const deleteTheme = async (id) => {
     const response = await themesApi.delete(`/themes/${id}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la suppression du thème :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default themesApi;

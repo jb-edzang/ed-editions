@@ -1,9 +1,11 @@
-import { signUp } from "../../services/api/signUpApi";
+import { signUpWrapper } from "../../services/api/signUpApi";
 
 export default async function handler(req, res) {
+  //const db = useDatabase();
+
   if (req.method === "POST") {
     try {
-      const result = await signUp(req.body);
+      const result = await signUpWrapper(req.body);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ error: error.message });

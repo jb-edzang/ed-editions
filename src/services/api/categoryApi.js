@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const categoryApi = axios.create({
-  baseURL: "https://localhost:3030/api", // Assurez-vous de mettre la bonne URL de votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030/api",
 });
 
 export const getAllCategories = async () => {
@@ -10,7 +9,13 @@ export const getAllCategories = async () => {
     const response = await categoryApi.get("/categories");
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération des catégories :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -19,7 +24,13 @@ export const getCategoryById = async (categoryId) => {
     const response = await categoryApi.get(`/categories/${categoryId}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération de la catégorie par ID :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -28,7 +39,13 @@ export const createCategory = async (newCategory) => {
     const response = await categoryApi.post("/categories", newCategory);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la création d'une catégorie :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -40,7 +57,13 @@ export const updateCategory = async (categoryId, updatedCategory) => {
     );
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la mise à jour de la catégorie :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -49,6 +72,14 @@ export const deleteCategory = async (deletedCategory) => {
     const response = await categoryApi.delete(`/categories/${deletedCategory}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la suppression de la catégorie :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default categoryApi;

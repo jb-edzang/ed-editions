@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     case "GET":
       // Endpoint pour récupérer tous les livres
       try {
-        const books = await getAllBooks(req, res);
+        const books = await getAllBooks();
         res.status(200).json(books);
       } catch (error) {
         res.status(500).json({ error: "Failed to retrieve books" });
@@ -20,7 +20,13 @@ export default async function handler(req, res) {
     case "POST":
       // Endpoint pour créer un nouveau livre
       try {
-        const newBook = await createBook(req.body);
+        const newBook = await createBook({
+          title: req.body.title,
+          description: req.body.description,
+          publication_date: req.body.publication_date,
+          user_id: req.body.user_id, // Assurez-vous que user_id est disponible dans la requête
+          // Ajoutez d'autres champs si nécessaire
+        });
         res.status(201).json(newBook);
       } catch (error) {
         res.status(500).json({ error: "Failed to create a new book" });
@@ -30,7 +36,13 @@ export default async function handler(req, res) {
       // Endpoint pour mettre à jour un livre existant
       try {
         const { id } = req.query; // Assurez-vous que votre route inclut l'ID du livre
-        const updatedBook = await updateBook(id, req.body);
+        const updatedBook = await updateBook(id, {
+          title: req.body.title,
+          description: req.body.description,
+          publication_date: req.body.publication_date,
+          user_id: req.body.user_id, // Assurez-vous que user_id est disponible dans la requête
+          // Ajoutez d'autres champs si nécessaire
+        });
         res.status(200).json(updatedBook);
       } catch (error) {
         res.status(500).json({ error: "Failed to update the book" });

@@ -2,36 +2,37 @@ import { useState } from "react";
 import Layout from "@/Layout";
 import "tailwindcss/tailwind.css";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { signUpWrapper } from "@/services/api/signUpApi";
+import { sign } from "jsonwebtoken";
 
 const SignUpForm = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    user: "",
+    username: "",
     email: "",
     pwdHash: "",
   });
 
-  const [userValidation, setUserValidation] = useState(false);
-  const [passwordValidation, setPasswordValidation] = useState(false);
+  const [usernameValidation, setUsernameValidation] = useState(false);
+  const [pwdHashValidation, setPwdHashValidation] = useState(false);
   const [emailValidation, setEmailValidation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+    }));
 
     if (name === "username") {
       const isValidUser = /^[a-zA-Z][a-zA-Z0-9]*$/.test(value);
-      setUserValidation(isValidUser);
+      setUsernameValidation(isValidUser);
     }
 
     if (name === "pwdHash") {
       // Remplacer "password" par "pwdHash"
       const isValidPassword = /^[a-zA-Z0-9-_]{8,24}$/.test(value);
-      setPasswordValidation(isValidPassword);
+      setPwdHashValidation(isValidPassword);
     }
 
     if (name === "email") {
@@ -44,13 +45,17 @@ const SignUpForm = () => {
     e.preventDefault();
     try {
       // Soumission des données au serveur via "/api/signUp"
-      const response = await axios.post("/api/signup", formData);
+      const response = await signUpWrapper.post({
+        username: formData.username,
+        email: formData.email,
+        pwdHash: formData.pwdHash,
+      });
       console.log("User registered !", response.data);
       // Réinitialiser le formulaire
-      setFormData({ user: "", email: "", pwdHash: "" }); // Remplacer "password" par "pwdHash"
-      setUserValidation(false);
+      setFormData({ username: "", email: "", pwdHash: "" });
+      setUsernameValidation(false);
       setEmailValidation(false);
-      setPasswordValidation(false);
+      setPwdHashValidation(false);
       // Redirection vers la page d'accueil après l'inscription réussie
       router.push("/");
     } catch (error) {
@@ -75,7 +80,7 @@ const SignUpForm = () => {
             </label>
             <input
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                userValidation ? "border-green-500" : "border-red-500"
+                usernameValidation ? "border-green-500" : "border-red-500"
               }`}
               id="username"
               type="text"
@@ -85,7 +90,7 @@ const SignUpForm = () => {
               value={formData.user}
               onChange={handleChange}
             />
-            {userValidation ? (
+            {usernameValidation ? (
               <span className="text-sm text-green-500">Valid username</span>
             ) : (
               <span className="text-sm text-red-500">Invalid username</span>
@@ -119,23 +124,23 @@ const SignUpForm = () => {
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
+              htmlFor="pwdHash"
             >
               Password :
             </label>
             <input
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                passwordValidation ? "border-green-500" : "border-red-500"
+                pwdHashValidation ? "border-green-500" : "border-red-500"
               }`}
-              id="password"
+              id="pwdHash"
               type="password"
-              name="pwdHash" // Remplacer "password" par "pwdHash"
+              name="pwdHash"
               autoComplete="off"
               placeholder="Password"
-              value={formData.pwdHash} // Remplacer "password" par "pwdHash"
+              value={formData.pwdHash}
               onChange={handleChange}
             />
-            {passwordValidation ? (
+            {pwdHashValidation ? (
               <span className="text-sm text-green-500">Valid password</span>
             ) : (
               <span className="text-sm text-red-500">

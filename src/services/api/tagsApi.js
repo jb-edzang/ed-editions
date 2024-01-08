@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const tagsApi = axios.create({
-  baseURL: "https://localhost:3030", // Assurez-vous d'adapter l'URL à votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030",
 });
 
 export const getAllTags = async () => {
@@ -10,7 +9,10 @@ export const getAllTags = async () => {
     const response = await tagsApi.get("/tags");
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la récupération des tags :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -19,7 +21,13 @@ export const getTagById = async (id) => {
     const response = await tagsApi.get(`/tags/${id}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération du tag par ID :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -28,7 +36,10 @@ export const createTag = async (tagData) => {
     const response = await tagsApi.post("/tags", tagData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la création du tag :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -37,7 +48,10 @@ export const updateTag = async (id, updatedData) => {
     const response = await tagsApi.put(`/tags/${id}`, updatedData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la mise à jour du tag :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -46,6 +60,11 @@ export const deleteTag = async (id) => {
     const response = await tagsApi.delete(`/tags/${id}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la suppression du tag :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default tagsApi;

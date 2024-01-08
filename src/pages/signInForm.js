@@ -1,15 +1,8 @@
 import Layout from "@/Layout";
 import { useState } from "react";
 import React from "react";
-import "tailwindcss/tailwind.css";
 import { useRouter } from "next/router";
-
-/*
-Page de connexion (SignIn)
-Méthode HTTP : POST pour envoyer les données de connexion au serveur.
-Objet requis : user, pwd.
-Path API : /api/signin.
-*/
+import "tailwindcss/tailwind.css";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -42,28 +35,48 @@ const SignInForm = () => {
 
   return (
     <Layout>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="pwd"
-          type="password"
-          name="password"
-          autoComplete="off"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Sign In</button>
-      </form>
+      <div className="flex items-center justify-center min-h-screen">
+        <form onSubmit={handleSubmit} className="w-full max-w-xs">
+          <h1 className="text-3xl font-bold text-center mb-4">Sign In</h1>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-3 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              autoComplete="off"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-3 py-2 mt-2 w-full focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+            >
+              Sign In
+            </button>
+          </div>
+        </form>
+      </div>
     </Layout>
   );
 };

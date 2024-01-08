@@ -26,12 +26,6 @@ const NavBar = () => {
     setShowCoworkerDropdown(false);
   };
 
-  const handleMenuClick = () => {
-    setShowPublishingDropdown(false);
-    setShowCatalogDropdown(false);
-    setShowCoworkerDropdown(false);
-  };
-
   return (
     <nav className="w-full">
       <ul className="flex space-x-4 justify-center">
@@ -102,7 +96,7 @@ const NavBar = () => {
             onMouseEnter={handleCoworkerDropdown}
             onMouseLeave={handleCoworkerDropdown}
           >
-            Collaborateurs
+            Collaborations
             {showCoworkerDropdown && (
               <ul className="dropdown-menu absolute z-10 transition-all duration-300 ease-in-out transform opacity-100 scale-100 origin-top bg-gray-100 text-black">
                 <li>

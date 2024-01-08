@@ -4,7 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const SearchInput = ({ search, setSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log("valeur de recherche soumise :", search);
+    //console.log("valeur de recheche soumise :", search);
     setSearch("");
   };
 
@@ -23,7 +23,7 @@ const SearchInput = ({ search, setSearch }) => {
           placeholder="Search input"
           value={search}
           onChange={handleChange}
-          className="rounded p-3 "
+          className="rounded p-3 border border-gray-400"
         />
         <FontAwesomeIcon
           icon={faSearch}

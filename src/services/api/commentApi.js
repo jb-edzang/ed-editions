@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const commentApi = axios.create({
-  baseURL: "https://localhost:3030", // Assurez-vous de mettre la bonne URL de votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030",
 });
 
 export const getAllComments = async () => {
@@ -10,7 +9,13 @@ export const getAllComments = async () => {
     const response = await commentApi.get("/comments");
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération des commentaires :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -19,7 +24,10 @@ export const createComment = async (commentData) => {
     const response = await commentApi.post("/comments", commentData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de la création du commentaire :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -31,7 +39,13 @@ export const updateComment = async (commentId, commentData) => {
     );
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la mise à jour du commentaire :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -40,6 +54,14 @@ export const deleteComment = async (commentId) => {
     const response = await commentApi.delete(`/comments/${commentId}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la suppression du commentaire :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default commentApi;

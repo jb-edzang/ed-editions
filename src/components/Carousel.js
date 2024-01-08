@@ -24,40 +24,44 @@ const Home = () => {
               <Image
                 src="/La Grave Tunnel.JPEG"
                 alt="La Grave Tunnel"
-                loading="lazy"
+                //loading="lazy"
                 width={500}
                 height={500}
                 className="w-full h-full"
+                priority
               />
             </div>
             <div>
               <Image
                 src="/Mont Blanc.JPEG"
                 alt="Mont Blanc"
-                loading="lazy"
+                //loading="lazy"
                 width={500}
                 height={500}
                 className="w-full h-full"
+                priority
               />
             </div>
             <div>
               <Image
                 src="/Touffes Lautaret.JPEG"
                 alt="Touffes Lautaret"
-                loading="lazy"
+                //loading="lazy"
                 width={500}
                 height={500}
                 className="w-full h-full"
+                priority
               />
             </div>
             <div>
               <Image
                 src="/Virages neiges Brouillard NB.JPEG"
                 alt="Virages neiges Brouillard NB"
-                loading="lazy"
+                //loading="lazy"
                 width={500}
                 height={500}
                 className="w-full h-full"
+                priority
               />
             </div>
           </Slider>

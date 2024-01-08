@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const getUsersApi = axios.create({
-  baseURL: "https://localhost:3030", // Assurez-vous d'adapter l'URL à votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030",
 });
 
 export const getUsers = async () => {
@@ -10,7 +9,13 @@ export const getUsers = async () => {
     const response = await getUsersApi.get("/users");
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la récupération des utilisateurs :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -19,7 +24,13 @@ export const createUser = async (userData) => {
     const response = await getUsersApi.post("/users", userData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la création de l'utilisateur :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -28,7 +39,13 @@ export const updateUser = async (id, updatedData) => {
     const response = await getUsersApi.put(`/users/${id}`, updatedData);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la mise à jour de l'utilisateur :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
 
@@ -37,6 +54,14 @@ export const deleteUser = async (id) => {
     const response = await getUsersApi.delete(`/users/${id}`);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error(
+        "Erreur lors de la suppression de l'utilisateur :",
+        err.message
+      );
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default getUsersApi;

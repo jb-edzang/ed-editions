@@ -1,16 +1,20 @@
 import axios from "axios";
 
 const authApi = axios.create({
-  baseURL: "https://localhost:3030/api", // Assurez-vous de mettre la bonne URL de votre API
-  //timeout: 5000, // Durée d'attente maximale pour chaque requête (ms)
+  baseURL: "https://localhost:3030/api",
 });
 
 export const authUser = async (userData) => {
   try {
-    const response = await authApi.post("/api/auth", userData);
+    const response = await authApi.post("/auth", userData); // Pas besoin de /api ici si vous avez déjà la base URL configurée
     console.log(response.data);
     return response.data;
   } catch (err) {
-    throw new Error(err.response.data.error);
+    if (axios.isAxiosError(err)) {
+      console.error("Erreur lors de l'authentification :", err.message);
+    }
+    throw new Error(err.response?.data?.error || "Une erreur s'est produite");
   }
 };
+
+export default authApi;
