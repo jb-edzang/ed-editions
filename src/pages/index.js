@@ -5,8 +5,8 @@ import Carousel from "@/components/Carousel";
 
 const page = () => {
   return (
-    <Layout className="">
-      <div>
+    <Layout>
+      <div className="h-screen">
         <Carousel />
       </div>
     </Layout>

@@ -1,4 +1,4 @@
-import { signUp } from "../services/api/api";
+import { signUp } from "../services/services/api";
 
 const SignUp = async () => {
   // logique pour obtenir les données du formulaire de sign up

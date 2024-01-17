@@ -4,7 +4,7 @@ import {
   createLike,
   updateLike,
   deleteLike,
-} from "../../services/api/likesApi";
+} from "../../services/services/likesApi";
 
 export default async function handler(req, res) {
   switch (req.method) {

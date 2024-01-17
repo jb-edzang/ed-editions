@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import "tailwindcss/tailwind.css";
 import Layout from "@/Layout";
+import { createLike } from "@/services/likesApi";
 
 const Likes = () => {
   const [likeData, setLikeData] = useState({
@@ -19,9 +20,18 @@ const Likes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { photo_id, user_id } = likeData;
     try {
-      const response = await axios.post("/api/likes", likeData);
+      const response = await createLike({
+        photo_id,
+        user_id,
+      });
       console.log("Liked photo!", response.data);
+      setLikeData({
+        user_id: "",
+        photo_id: "",
+      });
     } catch (error) {
       console.error("Like failed:", error);
     }

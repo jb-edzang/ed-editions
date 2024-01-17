@@ -1,4 +1,4 @@
-import { signInUser } from "../../services/api/signInApi";
+import { signInUser } from "../../services/services/signInApi";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

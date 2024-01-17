@@ -1,4 +1,4 @@
-import { authUser } from "../../services/api/authApi";
+import { authUser } from "../../services/services/authApi";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

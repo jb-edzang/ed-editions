@@ -4,7 +4,7 @@ import {
   createTag,
   updateTag,
   deleteTag,
-} from "../../services/api/tagsApi";
+} from "../../services/services/tagsApi";
 
 export default async function handler(req, res) {
   switch (req.method) {

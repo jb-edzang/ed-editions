@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import Layout from "@/Layout";
-import axios from "axios";
+import { createUser } from "@/services/userApi";
+import { useRouter } from "next/router";
 
 const User = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
-    user: "",
+    username: "",
     email: "",
     pwdHash: "",
   });
@@ -19,17 +21,31 @@ const User = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { username, email, pwdHash } = formData;
+
+    // Vérification des champs obligatoires
+    if (!username || !email || !pwdHash) {
+      console.log("Username, email, and password are required");
+      return;
+    }
+
     try {
-      const response = await axios.post("/api/users", formData); // Envoi des données du formulaire avec la requête POST
-      console.log("Form submitted with data:", formData);
+      const response = await createUser({
+        username,
+        email,
+        pwdHash,
+      });
+
+      console.log("Form submitted with data:", { username, email, pwdHash });
       console.log("Response:", response.data);
 
       setFormData({
-        // Réinitialisation des données du formulaire après la soumission
         username: "",
         email: "",
-        password: "",
+        pwdHash: "",
       });
+      router.push("/");
     } catch (error) {
       console.error("Data submission failed", error);
     }
@@ -48,9 +64,10 @@ const User = () => {
               Username
             </label>
             <input
+              required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              name="user"
+              name="username"
               value={formData.user}
               onChange={handleChange}
             />
@@ -60,6 +77,7 @@ const User = () => {
               Email
             </label>
             <input
+              required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               name="email"
@@ -72,6 +90,7 @@ const User = () => {
               Password
             </label>
             <input
+              required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
               name="pwdHash"

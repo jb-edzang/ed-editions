@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllTags } from "../services/api/tagsApi";
+import { getAllTags } from "../services/tagsApi";
 
 const TagsPage = () => {
   const [tags, setTags] = useState([]);

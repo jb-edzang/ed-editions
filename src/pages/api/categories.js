@@ -4,7 +4,7 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-} from "../../services/api/categoryApi";
+} from "../../services/services/categoryApi";
 
 export default async function handler(req, res) {
   switch (req.method) {

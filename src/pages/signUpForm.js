@@ -2,8 +2,7 @@ import { useState } from "react";
 import Layout from "@/Layout";
 import "tailwindcss/tailwind.css";
 import { useRouter } from "next/router";
-import { signUpWrapper } from "@/services/api/signUpApi";
-import { sign } from "jsonwebtoken";
+import signUpRequest from "../services/signUpApi";
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -30,7 +29,6 @@ const SignUpForm = () => {
     }
 
     if (name === "pwdHash") {
-      // Remplacer "password" par "pwdHash"
       const isValidPassword = /^[a-zA-Z0-9-_]{8,24}$/.test(value);
       setPwdHashValidation(isValidPassword);
     }
@@ -44,19 +42,22 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Soumission des données au serveur via "/api/signUp"
-      const response = await signUpWrapper.post({
+      const response = await signUpRequest({
         username: formData.username,
         email: formData.email,
         pwdHash: formData.pwdHash,
       });
-      console.log("User registered !", response.data);
-      // Réinitialiser le formulaire
-      setFormData({ username: "", email: "", pwdHash: "" });
+      console.log("User registered!", response.data);
+      // Réinitialisation du formulaire et redirection
+      setFormData({
+        username: "",
+        email: "",
+        pwdHash: "",
+      });
+      console.log("User registred !", response);
       setUsernameValidation(false);
       setEmailValidation(false);
       setPwdHashValidation(false);
-      // Redirection vers la page d'accueil après l'inscription réussie
       router.push("/");
     } catch (error) {
       console.error("Signup failed:", error);
@@ -87,7 +88,7 @@ const SignUpForm = () => {
               name="username"
               autoComplete="off"
               placeholder="Username"
-              value={formData.user}
+              value={formData.username}
               onChange={handleChange}
             />
             {usernameValidation ? (

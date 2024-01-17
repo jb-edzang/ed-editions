@@ -4,7 +4,7 @@ import {
   createTheme,
   updateTheme,
   deleteTheme,
-} from "../../services/api/themesApi";
+} from "../../services/services/themesApi";
 
 export default async function handler(req, res) {
   const { method } = req;

@@ -1,15 +1,13 @@
 import {
   getAllBooks,
-  //getBookById,
   createBook,
   updateBook,
   deleteBook,
-} from "../../services/api/bookApi";
+} from "../../services/bookApi";
 
 export default async function handler(req, res) {
   switch (req.method) {
     case "GET":
-      // Endpoint pour récupérer tous les livres
       try {
         const books = await getAllBooks();
         res.status(200).json(books);
@@ -18,14 +16,12 @@ export default async function handler(req, res) {
       }
       break;
     case "POST":
-      // Endpoint pour créer un nouveau livre
       try {
         const newBook = await createBook({
           title: req.body.title,
           description: req.body.description,
           publication_date: req.body.publication_date,
-          user_id: req.body.user_id, // Assurez-vous que user_id est disponible dans la requête
-          // Ajoutez d'autres champs si nécessaire
+          user_id: req.body.user_id,
         });
         res.status(201).json(newBook);
       } catch (error) {
@@ -33,15 +29,13 @@ export default async function handler(req, res) {
       }
       break;
     case "PUT":
-      // Endpoint pour mettre à jour un livre existant
       try {
-        const { id } = req.query; // Assurez-vous que votre route inclut l'ID du livre
+        const { id } = req.query;
         const updatedBook = await updateBook(id, {
           title: req.body.title,
           description: req.body.description,
           publication_date: req.body.publication_date,
-          user_id: req.body.user_id, // Assurez-vous que user_id est disponible dans la requête
-          // Ajoutez d'autres champs si nécessaire
+          user_id: req.body.user_id,
         });
         res.status(200).json(updatedBook);
       } catch (error) {
@@ -49,9 +43,8 @@ export default async function handler(req, res) {
       }
       break;
     case "DELETE":
-      // Endpoint pour supprimer un livre
       try {
-        const { id } = req.query; // Assurez-vous que votre route inclut l'ID du livre
+        const { id } = req.query;
         const deletedBook = await deleteBook(id);
         res.status(200).json(deletedBook);
       } catch (error) {

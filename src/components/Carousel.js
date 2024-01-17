@@ -16,7 +16,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex ">
+    <div className="flex">
       <div className="w-full">
         <div className="relative w-full h-full">
           <Slider {...settings}>

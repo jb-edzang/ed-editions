@@ -3,7 +3,7 @@ import {
   createPhoto,
   updatePhoto,
   deletePhoto,
-} from "../../services/api/photoApi";
+} from "../../services/services/photoApi";
 
 export default async function handler(req, res) {
   switch (req.method) {

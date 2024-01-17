@@ -10,9 +10,12 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState("");
 
   // Fonction pour mettre à jour user_id
-  const updateUserId = (newUserId) => {
+  const updateUserId = (newUserId, newToken, newUsername, newUserRole) => {
     setUserId(newUserId);
     setIsAuthenticated(!!newUserId);
+    setToken(newToken);
+    setUsername(newUsername);
+    setUserRole(newUserRole);
   };
 
   const logout = () => {

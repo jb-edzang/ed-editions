@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllThemes } from "../services/api/themesApi";
+import { getAllThemes } from "../services/themesApi";
 
 const ThemesPage = () => {
   const [themes, setThemes] = useState([]);

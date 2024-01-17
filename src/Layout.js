@@ -11,15 +11,15 @@ const Layout = ({ children }) => {
         <title>EMPREINTES & DIGITALES | Editions</title>
         <meta
           name="Description"
-          content="Empreintes & Digitales est une maison d'éditions consacrée à la photographie engagée pour l'environnement"
+          content="Empreintes & Digitales est une maison d'édition consacrée à la photographie engagée pour l'environnement"
         />
       </Head>
       <div className="flex flex-col min-h-screen">
-        <Header className="fixed top-0 w-full " />
+        <Header className="" />
         <AuthProvider>
-          <main className="flex-grow">{children}</main>
+          <main className="">{children}</main>
         </AuthProvider>
-        <Footer className=" " />
+        <Footer />
       </div>
     </>
   );

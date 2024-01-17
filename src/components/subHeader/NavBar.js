@@ -44,18 +44,18 @@ const NavBar = () => {
             {showPublishingDropdown && (
               <ul className="dropdown-menu absolute z-10 transition-all duration-300 ease-in-out transform opacity-100 scale-100 origin-top bg-gray-100 text-black">
                 <li>
-                  <Link href="uploadBook" className="block px-4 py-2 w-full">
-                    Nouveaux Livres
+                  <Link href="photoPage" className="block px-4 py-2 w-full">
+                    Galerie de photos
                   </Link>
                 </li>
                 <li>
-                  <Link href="uploadPhoto" className="block px-4 py-2 w-full">
-                    Nouvelles galeries
+                  <Link href="/" className="block px-4 py-2 w-full">
+                    Galerie de livres ?
                   </Link>
                 </li>
                 <li>
-                  <Link href="uploadComment" className="block px-4 py-2 w-full">
-                    Actualité
+                  <Link href="/" className="block px-4 py-2 w-full">
+                    Actualité ?
                   </Link>
                 </li>
               </ul>

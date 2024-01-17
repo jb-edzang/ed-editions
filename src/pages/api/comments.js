@@ -3,7 +3,7 @@ import {
   createComment,
   updateComment,
   deleteComment,
-} from "../../services/api/./commentApi";
+} from "../../services/services/commentApi";
 
 export default async function handler(req, res) {
   const { method } = req;

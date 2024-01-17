@@ -4,7 +4,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
-} from "../../services/api/userApi";
+} from "../../services/services/userApi";
 
 export default async function handler(req, res) {
   switch (req.method) {

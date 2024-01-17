@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import Layout from "@/Layout";
+import { createComment } from "@/services/commentApi";
 
 const CreateComment = () => {
   const [commentData, setCommentData] = useState({
@@ -20,7 +21,7 @@ const CreateComment = () => {
     e.preventDefault();
     setCommentData("");
     try {
-      const response = await axios.post("/api/comments", commentData);
+      const response = await createComment("/api/comments", commentData);
       console.log("Comment created!", response.data);
       setCommentData({ ...commentData, content: "" }); // Réinitialisation du champ du commentaire après soumission
       // Gérer la réponse du serveur, rediriger ou effectuer d'autres actions

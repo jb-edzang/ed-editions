@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import Layout from "@/Layout";
+import getUsersApi from "@/services/getUsersApi";
 
 /*
 Page de récupération des utilisateurs (GetUsers)
@@ -14,7 +15,7 @@ const GetUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/users");
+        const response = await getUsersApi.get("/users");
         setUsers(response.data);
         console.log("Fetched users:", response.data);
         // Gérer la réponse du serveur
@@ -32,8 +33,11 @@ const GetUsers = () => {
       <h1>Users List</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.user}</li>
-          // Personnalisez l'affichage des données des utilisateurs selon votre structure de données
+          <li key={user.id}>
+            <p>ID:{user.id} </p>
+            <p>Username:{user.username} </p>
+            <p>Email:{user.email} </p>
+          </li>
         ))}
       </ul>
     </Layout>
