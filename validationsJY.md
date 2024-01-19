@@ -1,0 +1,11 @@
+- [ ] contenu des listes déroulantes par menu ?
+  - [ ] Menu Publications:
+  - [ ] Menu catalogue: 
+  - [ ] Menu Collaborations: 
+- [ ] nom de domaine ?
+  - [ ] site actuel et possibilité de faire une redirection vers le nouveau site
+  - [ ] site actuel et changer le code et garder le même lien ??
+  - [ ] hébergement des photos et vidéos chez Amazon (S3 de AWS : simple storage service) ou un autre service de stockage en ligne  
+- [ ] données protégées & données publiques
+  - [ ] dashboard en tant qu'admin
+  - [ ] données publiques: socialIcons, contenu des menus,
